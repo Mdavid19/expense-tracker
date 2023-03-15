@@ -1,4 +1,4 @@
-package main.java.com.main.tracker;
+package com.main.tracker;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
