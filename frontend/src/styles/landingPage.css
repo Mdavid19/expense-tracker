@@ -1,0 +1,19 @@
+#landing-page-root{
+    background:url("../images/save_money_bg1.jpeg") no-repeat;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+
+}
+
+#sign-up-form{
+    width: 25%;
+    padding: 2%;
+    position: absolute;
+    left: 10%;
+    top: 5%;
+    border: #52b202 2px solid;
+    border-bottom-left-radius: 100px;
+    border-top-right-radius: 100px;
+    background-color: rgba(213, 232, 213, 0.4);
+}
