@@ -1,4 +1,4 @@
-package com.main.tracker.configuration.service;
+package com.main.tracker.security.service;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
