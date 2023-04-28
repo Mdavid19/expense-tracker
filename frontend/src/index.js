@@ -4,16 +4,20 @@ import './styles/index.css';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
+import UserProvider from "./context/UserProvider";
+import MainPage from "./pages/MainPage"
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+      <UserProvider>
         <Router>
             <Routes>
                 <Route path='/' element={<LandingPage/>}/>
+                <Route path='/main' element={<MainPage/>}/>
             </Routes>
         </Router>
-
+      </UserProvider>
   </React.StrictMode>
 );
 

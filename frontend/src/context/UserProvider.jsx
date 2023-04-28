@@ -1,4 +1,5 @@
 import {createContext, useContext, useEffect, useState} from "react";
+import {useNavigate} from "react-router-dom";
 
 const UserContext = createContext({});
 const getToken = () => window.localStorage.getItem("token")
@@ -29,7 +30,7 @@ const UserProvider = ({children}) => {
             return;
         }
         getMe(token);
-    })
+    },[])
 
     const login = (creds) => {
         fetch('/login', {
@@ -44,6 +45,7 @@ const UserProvider = ({children}) => {
                 const {token} = res
                 setToken(token)
                 getMe(token)
+
             })
     }
 

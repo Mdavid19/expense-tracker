@@ -1,12 +1,15 @@
-import React from 'react';
+import React, {useState} from 'react';
 import "../styles/landingPage.css"
-import {Box, Button, Container, createTheme, Grid, Modal, TextField, ThemeProvider} from "@mui/material";
+import {Box, Button, Container, createTheme, Grid, TextField, ThemeProvider} from "@mui/material";
+import LoginModal from "../components/LoginModal/LoginModal";
 
 
 const LandingPage = () => {
-    const [open, setOpen] = React.useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [name, setName] = useState("");
+    const [username, setUsername] = useState("");
+
     const theme = createTheme({
         palette:{
             primary:{
@@ -35,6 +38,28 @@ const LandingPage = () => {
         p: 4,
     };
 
+    const registrationCreds = {
+        fullName:name,
+        username:username,
+        email:email,
+        password:password
+    }
+
+    const sendUserCreds = ()=>{
+        fetch('/register',{
+            method:"POST",
+            headers:{
+                "Content-type": "application/json"
+            },
+            body: JSON.stringify(registrationCreds)
+        })
+            .then(()=>{console.log("Registration successful")
+                setUsername("");
+                setEmail("");
+                setName("");
+                setPassword("");
+            })
+    }
 
     return (
         <div id={'landing-page-root'}>
@@ -53,24 +78,31 @@ const LandingPage = () => {
                             <Grid item xs={12}>
                                 <TextField
                                     autoComplete="given-name"
-                                    name="firstName"
+                                    name="fullName"
                                     required
                                     fullWidth
-                                    id="firstName"
-                                    label="First Name"
+                                    id="fullName"
+                                    label="Name"
                                     autoFocus
                                     variant={"filled"}
+                                    onChange={(event)=>{
+                                        setName(event.target.value)
+                                    }}
+                                    value={name}
                                 />
-                            </Grid>
-                            <Grid item xs={12}>
+                            </Grid><Grid item xs={12}>
                                 <TextField
-                                    name="lastName"
+                                    name="username"
                                     required
                                     fullWidth
-                                    id="lastName"
-                                    label="Last Name"
+                                    id="username"
+                                    label="Username"
                                     autoFocus
                                     variant={"filled"}
+                                    onChange={(event)=>{
+                                        setUsername(event.target.value)
+                                    }}
+                                    value={username}
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -82,6 +114,10 @@ const LandingPage = () => {
                                     label="E-mail"
                                     autoFocus
                                     variant={"filled"}
+                                    onChange={(event)=>{
+                                        setEmail(event.target.value)
+                                    }}
+                                    value={email}
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -93,66 +129,24 @@ const LandingPage = () => {
                                     label="Password"
                                     autoFocus
                                     variant={"filled"}
+                                    onChange={(event)=>{
+                                        setPassword(event.target.value)
+                                    }}
+                                    value={password}
                                 />
                             </Grid>
                         </Grid>
                         <Button
-                            type="submit"
                             fullWidth
                             variant="contained"
                             sx={{ mt: 3, mb: 2 }}
                             color="secondary"
+                            onClick={sendUserCreds}
                         >
                             Sign Up
                         </Button>
                     </Box>
-
-                    <Box>
-                        <Button onClick={handleOpen} fullWidth variant="outlined" sx={{mt:1,  mb:1}} color="secondary">Log In</Button>
-                        <Modal
-                            open={open}
-                            onClose={handleClose}
-                            aria-labelledby="modal-modal-title"
-                            aria-describedby="modal-modal-description"
-                        >
-                            <Box component={"form"} noValidate sx = {style}>
-                                <Grid container spacing={1}>
-                                    <Grid item xs={12}>
-                                        <TextField
-                                            autoComplete="email"
-                                            name="email"
-                                            required
-                                            fullWidth
-                                            id="email"
-                                            label="Email"
-                                            autoFocus
-                                            variant={"filled"}
-                                        />
-                                    </Grid>
-                                    <Grid item xs={12}>
-                                        <TextField
-                                            name="password"
-                                            required
-                                            fullWidth
-                                            id="password"
-                                            label="Password"
-                                            autoFocus
-                                            variant={"filled"}
-                                        />
-                                    </Grid>
-                                </Grid>
-                                <Button
-                                    type="submit"
-                                    fullWidth
-                                    variant="contained"
-                                    sx={{ mt: 3, mb: 2 }}
-                                    color="secondary"
-                                >
-                                    Log In
-                                </Button>
-                            </Box>
-                        </Modal>
-                    </Box>
+                    <LoginModal style={style}/>
                 </ThemeProvider>
             </Container>
         </div>
@@ -160,3 +154,4 @@ const LandingPage = () => {
 };
 
 export default LandingPage;
+
