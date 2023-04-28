@@ -26,7 +26,8 @@ public class AuthenticationService {
     public String register(RegisterRequest request){
         var user = Client.builder()
                 .fullName(request.getFullName())
-                .username(request.getUserName())
+                .username(request.getUsername())
+                .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(Role.USER)
                 .build();

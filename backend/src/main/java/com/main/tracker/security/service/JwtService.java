@@ -35,7 +35,7 @@ public class JwtService {
         return extractClaim(token, Claims::getSubject);
     }
 
-    // Is that working if I don't use claimResolver
+
     public <T> T extractClaim(String token, Function<Claims,T> claimResolver){
         final Claims claims = extractAllClaims(token);
         return claimResolver.apply(claims);

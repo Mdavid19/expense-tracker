@@ -25,6 +25,8 @@ public class Client implements UserDetails {
 
     private String password;
 
+    private String email;
+
     @Enumerated(EnumType.STRING)
     private Role role;
 
