@@ -17,8 +17,8 @@ const theme = createTheme({
     }
 })
 
-const SideBar = () => {
-    const [view, setView] = React.useState('list');
+const SideBar = ({view, setView}) => {
+
 
     const handleChange = (event, nextView) => {
         setView(nextView);
@@ -37,6 +37,7 @@ const SideBar = () => {
                 <ToggleButton aria-label={"Daily"} value={"Daily"} sx={{ width:"100%"}}>Daily</ToggleButton>
                 <ToggleButton aria-label={"Monthly"}  value={"Monthly"} sx={{ width:"100%"}}>Monthly</ToggleButton>
                 <ToggleButton aria-label={"Yearly"}  value={"Yearly"} sx={{ width:"100%"}}>Yearly</ToggleButton>
+                <ToggleButton aria-label={"Detailed"}  value={"Detailed"} sx={{ width:"100%"}}>Detailed</ToggleButton>
             </ToggleButtonGroup>
         </Box>
     </ThemeProvider>

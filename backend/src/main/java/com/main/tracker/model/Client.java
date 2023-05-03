@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -26,6 +27,9 @@ public class Client implements UserDetails {
     private String password;
 
     private String email;
+
+    @OneToMany(mappedBy = "client")
+    private Set<Receipt> receipts;
 
     @Enumerated(EnumType.STRING)
     private Role role;
