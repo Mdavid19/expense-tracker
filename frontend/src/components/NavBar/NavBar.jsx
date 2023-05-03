@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography"
 import {useUser} from "../../context/UserProvider";
 import Button from "@mui/material/Button"
 import {useNavigate} from "react-router-dom";
+import AddExpenseDialog from "../AddExpenseDialog";
 
 
 const theme = createTheme({
@@ -40,8 +41,8 @@ const NavBar = () => {
                         <Typography variant={'h6'} component={"div"}>
                            Hello, {user.username}
                         </Typography>
-                        <Button color="inherit">Add Expense</Button>
-                        <Button color="inherit" onClick={handleLogout} >Logout</Button>
+                        <AddExpenseDialog/>
+                        <Button color="inherit" variant={"outlined"} onClick={handleLogout}>Logout</Button>
                 </Toolbar>
             </AppBar>
         </ThemeProvider>
