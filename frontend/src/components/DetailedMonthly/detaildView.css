@@ -1,0 +1,80 @@
+.detailed{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-around;
+
+}
+
+.traveling{
+    border-color: #1e1eff;
+    border-width: 10px;
+    border-style: solid;
+    border-radius: 50%;
+    height: 40vh;
+    width: 40vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.food{
+    border-color: #1e1eff;
+    border-width: 10px;
+    border-style: solid;
+    border-radius: 50%;
+    height: 40vh;
+    width: 40vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gift{
+    border-color: #1e1eff;
+    border-width: 10px;
+    border-style: solid;
+    border-radius: 50%;
+    height: 40vh;
+    width: 40vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.permanent{
+    border-color: #1e1eff;
+    border-width: 10px;
+    border-style: solid;
+    border-radius: 50%;
+    height: 40vh;
+    width: 40vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.freetime{
+    border-color: #1e1eff;
+    border-width: 10px;
+    border-style: solid;
+    border-radius: 50%;
+    height: 40vh;
+    width: 40vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.healthy{
+    border-color: #1e1eff;
+    border-width: 10px;
+    border-style: solid;
+    border-radius: 50%;
+    height: 40vh;
+    width: 40vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
