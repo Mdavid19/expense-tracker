@@ -3,10 +3,10 @@ import Button from '@mui/material/Button'
 import Dialog from '@mui/material/Dialog'
 import DialogTitle from '@mui/material/DialogTitle'
 import DialogContent from '@mui/material/DialogContent'
-import DialogContentText from '@mui/material/DialogContentText'
 import DialogActions from '@mui/material/DialogActions'
 import {createTheme, ThemeProvider} from "@mui/material";
 import TextField from '@mui/material/TextField'
+import {useUser} from "../../context/UserProvider";
 
 const theme = createTheme({
     palette:{
@@ -23,6 +23,9 @@ const theme = createTheme({
 function AddExpenseDialog(props) {
     const [open, setOpen] = React.useState(false);
     const [amount, setAmount] = React.useState(null);
+    const {user} = useUser();
+
+
 
     const handleOpen = ()=>{
         setOpen(true)
@@ -32,7 +35,29 @@ function AddExpenseDialog(props) {
         setOpen(false)
     }
 
+    const data = {
+        username:user.username,
+        value:amount
+    }
 
+    function sendData(){
+        fetch("/api/receipt/add",{
+            method:"POST",
+            headers:{
+                Authorization: `Bearer ${window.localStorage.getItem('token')}`,
+                "Content-type":"application/json"
+            },
+            body: JSON.stringify(data)
+        }).then((res)=>{
+            console.log(res.status)
+        })
+    }
+
+    const sendAmount = ()=>{
+        console.log(JSON.stringify(data))
+        sendData()
+        handleClose()
+    }
 
     return (
         <ThemeProvider theme={theme}>
@@ -52,7 +77,7 @@ function AddExpenseDialog(props) {
                         <Button onClick={handleClose} color="primary">
                             Close
                         </Button>
-                        <Button onClick={handleClose} color="primary">
+                        <Button onClick={sendAmount} color="primary">
                             Add
                         </Button>
                     </DialogActions>

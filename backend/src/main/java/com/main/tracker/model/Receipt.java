@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
@@ -19,7 +20,7 @@ public class Receipt {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    private int value;
+    private BigDecimal value;
 
     private LocalDate date;
 
