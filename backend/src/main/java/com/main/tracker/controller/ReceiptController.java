@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/receipt")
@@ -30,8 +31,9 @@ public class ReceiptController {
         receiptService.saveReceipt(receipt);
     }
 
-    @GetMapping
-    public String fuckyou(){
-        return "Fuck you you fucking bitch";
+    @GetMapping("/monthly")
+    public String getReceiptsTotalValue(@RequestParam Long id, @RequestParam int month){
+        String total =  receiptService.getReceiptByUser(id,month).toString();
+        return total;
     }
 }
