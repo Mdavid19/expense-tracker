@@ -22,7 +22,7 @@ const theme = createTheme({
 
 function AddExpenseDialog(props) {
     const [open, setOpen] = React.useState(false);
-    const [amount, setAmount] = React.useState(null);
+    const [amount, setAmount] = React.useState(null); // kitenni a mainre és csak a frontenden hozzáadni a useSATEHEZ ÉS NEM KELL FETCH CHAK HA TAB VÁLTÁS VAN
     const {user} = useUser();
 
 

@@ -8,10 +8,12 @@ import MonthlyExpense from "../components/MotnhlyExpense";
 import DailyExpense from "../components/DailyExpense";
 import YearlyExpense from "../components/YearlyExpense";
 import DetailedMonthlyView from "../components/DetailedMonthly";
+import dayjs from 'dayjs';
 
 const MainPage = () => {
     const [view, setView] = React.useState('Daily');
     const [content, setContent] = React.useState();
+    const [date, setDate] = React.useState(dayjs('2023-05-11'));
     const {user} = useUser();
     const navigate = useNavigate()
 
@@ -21,6 +23,9 @@ const MainPage = () => {
         }
     },[user,navigate])
 
+    useEffect(() => {
+        console.log(date.format('M'))
+    }, [date]);
 
     useEffect(() => {
         switch (view){
@@ -28,7 +33,7 @@ const MainPage = () => {
                 setContent(<DailyExpense/>)
                 break;
             case 'Monthly':
-                setContent(<MonthlyExpense/>)
+                setContent(<MonthlyExpense date={date}/>)
                 break;
             case 'Yearly':
                 setContent(<YearlyExpense/>)
@@ -37,14 +42,14 @@ const MainPage = () => {
                 setContent(<DetailedMonthlyView/>)
                 break;
         }
-    }, [view]);
+    }, [view,date]);
 
 
     return user?(
         <div style={{height:"100%"}}>
             <NavBar/>
             <div style={{height:'100%', display:'flex', flexDirection:'row'}}>
-                <SideBar view={view} setView={setView}/>
+                <SideBar view={view} setView={setView} date={date} setDate={setDate}/>
                 <div style={{ height:'100%', width:'100%', display:"flex", justifyContent:"center", alignItems:"center"}}>
                     {content}
                 </div>

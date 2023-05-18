@@ -3,19 +3,24 @@ import "./style.css"
 import useFetch from "../../hooks/useFetch";
 import {useUser} from "../../context/UserProvider";
 
-const MonthlyExpense = ({expense}) => {
-    const [month, setMonth] = React.useState(new Date().getMonth()+1);
+const MonthlyExpense = ({expense,date}) => {
+    const [month, setMonth] = React.useState(date.format('M'));
     const{user} = useUser()
     console.log(month)
-    let options = {
+    const options = {
         headers:{
             Authorization:`Bearer ${window.localStorage.getItem("token")}`,
         },
     }
 
+    React.useEffect(() => {
+        setMonth(date.format('M'))
+    }, [date]);
+
+
     const {loading,data,error} = useFetch("/api/receipt/monthly"+`?id=${user.id}&month=${month}`,options)
 
-    console.log(error)
+    console.log(error?error:"No error occurred")
 
     return(
         <div className={"circle"}>
