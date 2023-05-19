@@ -6,19 +6,22 @@ import {useUser} from "../../context/UserProvider";
 const MonthlyExpense = ({expense,date}) => {
     const [month, setMonth] = React.useState(date.format('M'));
     const{user} = useUser()
-    console.log(month)
     const options = {
         headers:{
             Authorization:`Bearer ${window.localStorage.getItem("token")}`,
         },
     }
+    const {loading,data,error} = useFetch("/api/receipt/monthly"+`?id=${user.id}&month=${month}`,options)
+    const [amount, setAmount] = React.useState(data);
+
 
     React.useEffect(() => {
         setMonth(date.format('M'))
-    }, [date]);
+        setAmount(expense)
+        console.log("izé")
+        console.log(amount)
+    }, [date,expense]);
 
-
-    const {loading,data,error} = useFetch("/api/receipt/monthly"+`?id=${user.id}&month=${month}`,options)
 
     console.log(error?error:"No error occurred")
 

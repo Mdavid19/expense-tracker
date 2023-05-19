@@ -20,7 +20,7 @@ const theme = createTheme({
     }
 })
 
-function AddExpenseDialog(props) {
+function AddExpenseDialog({expense,setExpense}) {
     const [open, setOpen] = React.useState(false);
     const [amount, setAmount] = React.useState(null); // kitenni a mainre és csak a frontenden hozzáadni a useSATEHEZ ÉS NEM KELL FETCH CHAK HA TAB VÁLTÁS VAN
     const {user} = useUser();
@@ -53,10 +53,10 @@ function AddExpenseDialog(props) {
         })
     }
 
-    const sendAmount = ()=>{
-        console.log(JSON.stringify(data))
-        sendData()
+    const sendAmount = async()=>{
+        await sendData()
         handleClose()
+        setExpense(amount)
     }
 
     return (

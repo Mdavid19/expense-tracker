@@ -14,6 +14,7 @@ const MainPage = () => {
     const [view, setView] = React.useState('Daily');
     const [content, setContent] = React.useState();
     const [date, setDate] = React.useState(dayjs('2023-05-11'));
+    const [expense, setExpense] = React.useState(null);
     const {user} = useUser();
     const navigate = useNavigate()
 
@@ -23,9 +24,7 @@ const MainPage = () => {
         }
     },[user,navigate])
 
-    useEffect(() => {
-        console.log(date.format('M'))
-    }, [date]);
+
 
     useEffect(() => {
         switch (view){
@@ -33,7 +32,7 @@ const MainPage = () => {
                 setContent(<DailyExpense/>)
                 break;
             case 'Monthly':
-                setContent(<MonthlyExpense date={date}/>)
+                setContent(<MonthlyExpense date={date} expense={expense}/>)
                 break;
             case 'Yearly':
                 setContent(<YearlyExpense/>)
@@ -42,12 +41,12 @@ const MainPage = () => {
                 setContent(<DetailedMonthlyView/>)
                 break;
         }
-    }, [view,date]);
+    }, [view,date,expense]);
 
 
     return user?(
         <div style={{height:"100%"}}>
-            <NavBar/>
+            <NavBar expense={expense} setExpense={setExpense}/>
             <div style={{height:'100%', display:'flex', flexDirection:'row'}}>
                 <SideBar view={view} setView={setView} date={date} setDate={setDate}/>
                 <div style={{ height:'100%', width:'100%', display:"flex", justifyContent:"center", alignItems:"center"}}>
