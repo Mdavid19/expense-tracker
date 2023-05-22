@@ -22,7 +22,7 @@ const theme = createTheme({
     }
 
 )
-const NavBar = () => {
+const NavBar = ({expense,setExpense, date}) => {
     const {user, logout} = useUser()
     const navigate = useNavigate()
 
@@ -41,7 +41,7 @@ const NavBar = () => {
                         <Typography variant={'h6'} component={"div"}>
                            Hello, {user.username}
                         </Typography>
-                        <AddExpenseDialog/>
+                        <AddExpenseDialog date={date}/>
                         <Button color="inherit" variant={"outlined"} onClick={handleLogout}>Logout</Button>
                 </Toolbar>
             </AppBar>

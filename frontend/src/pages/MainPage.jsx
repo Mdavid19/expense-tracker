@@ -8,10 +8,12 @@ import MonthlyExpense from "../components/MotnhlyExpense";
 import DailyExpense from "../components/DailyExpense";
 import YearlyExpense from "../components/YearlyExpense";
 import DetailedMonthlyView from "../components/DetailedMonthly";
+import dayjs from 'dayjs';
 
 const MainPage = () => {
     const [view, setView] = React.useState('Daily');
     const [content, setContent] = React.useState();
+    const [date, setDate] = React.useState(dayjs());
     const {user} = useUser();
     const navigate = useNavigate()
 
@@ -21,30 +23,39 @@ const MainPage = () => {
         }
     },[user,navigate])
 
+    const options = {
+        headers:{
+            Authorization:`Bearer ${window.localStorage.getItem("token")}`,
+        },
+    }
+
 
     useEffect(() => {
         switch (view){
+            default:
+                setContent(<DailyExpense date={date} options={options}/>)
+                break;
             case 'Daily':
-                setContent(<DailyExpense/>)
+                setContent(<DailyExpense date={date} options={options}/>)
                 break;
             case 'Monthly':
-                setContent(<MonthlyExpense/>)
+                setContent(<MonthlyExpense date={date} options={options}/>)
                 break;
             case 'Yearly':
-                setContent(<YearlyExpense/>)
+                setContent(<YearlyExpense date={date} options={options}/>)
                 break;
             case 'Detailed':
                 setContent(<DetailedMonthlyView/>)
                 break;
         }
-    }, [view]);
+    }, [view,date]);
 
 
     return user?(
         <div style={{height:"100%"}}>
-            <NavBar/>
+            <NavBar date={date}/>
             <div style={{height:'100%', display:'flex', flexDirection:'row'}}>
-                <SideBar view={view} setView={setView}/>
+                <SideBar view={view} setView={setView} date={date} setDate={setDate}/>
                 <div style={{ height:'100%', width:'100%', display:"flex", justifyContent:"center", alignItems:"center"}}>
                     {content}
                 </div>

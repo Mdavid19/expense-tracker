@@ -23,15 +23,26 @@ public class ReceiptController {
     public void saveReceipt(@RequestBody ReceiptRequest request){
         Receipt receipt = Receipt.builder()
                 .value(BigDecimal.valueOf(request.getValue()))
-                .date(LocalDate.now())
+                .date(request.getDate())
                 .client(clientService.getClient(request.getUsername()))
                 .build();
 
         receiptService.saveReceipt(receipt);
     }
 
-    @GetMapping
-    public String fuckyou(){
-        return "Fuck you you fucking bitch";
+    @GetMapping("/monthly")
+    public String getReceiptsTotalValue(@RequestParam Long id ,@RequestParam int year, @RequestParam int month){
+        return receiptService.getReceiptByUserByMonth(id,year,month).toString();
     }
+
+    @GetMapping("/daily")
+    public String getReceiptsTotalDailyValue(@RequestParam Long id, @RequestParam int month, @RequestParam int day, @RequestParam int year){
+        return receiptService.getReceiptByUserByMonthByDay(id, month, day, year).toString();
+    }
+
+    @GetMapping("/yearly")
+    public String getReceiptsTotalYearlyValue(@RequestParam Long id, @RequestParam int year){
+        return receiptService.getReceiptByUserByYear(id, year).toString();
+    }
+
 }

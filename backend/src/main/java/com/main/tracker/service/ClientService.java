@@ -13,4 +13,6 @@ public class ClientService {
     public Client getClient(String username){
         return clientRepository.findUserByUsername(username).orElse(null);
     }
+
+
 }

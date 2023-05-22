@@ -20,11 +20,16 @@ const theme = createTheme({
     }
 })
 
-function AddExpenseDialog(props) {
+function AddExpenseDialog({date}) {
     const [open, setOpen] = React.useState(false);
-    const [amount, setAmount] = React.useState(null);
+    const [amount, setAmount] = React.useState(null); // kitenni a mainre és csak a frontenden hozzáadni a useSATEHEZ ÉS NEM KELL FETCH CHAK HA TAB VÁLTÁS VAN
     const {user} = useUser();
+    const [localDate, setLocalDate] = React.useState(date);
 
+    React.useEffect(()=>{
+        setLocalDate(date)
+    },[date]
+)
 
 
     const handleOpen = ()=>{
@@ -37,7 +42,8 @@ function AddExpenseDialog(props) {
 
     const data = {
         username:user.username,
-        value:amount
+        value:amount,
+        date: localDate
     }
 
     function sendData(){
@@ -53,10 +59,10 @@ function AddExpenseDialog(props) {
         })
     }
 
-    const sendAmount = ()=>{
-        console.log(JSON.stringify(data))
-        sendData()
+    const sendAmount = async()=>{
+        await sendData()
         handleClose()
+
     }
 
     return (

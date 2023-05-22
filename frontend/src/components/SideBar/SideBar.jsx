@@ -3,6 +3,11 @@ import Box from "@mui/material/Box";
 import {createTheme, ThemeProvider} from "@mui/material";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup"
 import ToggleButton from "@mui/material/ToggleButton"
+import {DateCalendar} from '@mui/x-date-pickers/DateCalendar';
+import {LocalizationProvider} from "@mui/x-date-pickers";
+import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
+import Dialog from "@mui/material/Dialog";
+import Button from "@mui/material/Button"
 
 const theme = createTheme({
     palette: {
@@ -17,13 +22,19 @@ const theme = createTheme({
     }
 })
 
-const SideBar = ({view, setView}) => {
+const SideBar = ({view, setView,date,setDate}) => {
+    const [open, setOpen] = React.useState(false);
 
 
     const handleChange = (event, nextView) => {
         setView(nextView);
-        console.log(nextView)
     };
+    const handleOpen = () => {
+        setOpen(true);
+    }
+    const handleClose = () => {
+        setOpen(false)
+    }
 
     return(
     <ThemeProvider theme={theme}>
@@ -39,7 +50,14 @@ const SideBar = ({view, setView}) => {
                 <ToggleButton aria-label={"Yearly"}  value={"Yearly"} sx={{ width:"100%"}}>Yearly</ToggleButton>
                 <ToggleButton aria-label={"Detailed"}  value={"Detailed"} sx={{ width:"100%"}}>Detailed</ToggleButton>
             </ToggleButtonGroup>
+            <Button onClick={handleOpen} sx={{ width:"100%"}}>{date.format('YYYY-MM-DD')}</Button>
         </Box>
+        <Dialog open={open} onClose={handleClose}>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DateCalendar value={date} onChange={(newValue) => setDate(newValue)} />
+            </LocalizationProvider>
+        </Dialog>
+
     </ThemeProvider>
     )
 }
