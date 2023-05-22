@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/receipt")
@@ -24,7 +23,7 @@ public class ReceiptController {
     public void saveReceipt(@RequestBody ReceiptRequest request){
         Receipt receipt = Receipt.builder()
                 .value(BigDecimal.valueOf(request.getValue()))
-                .date(LocalDate.now())
+                .date(request.getDate())
                 .client(clientService.getClient(request.getUsername()))
                 .build();
 
@@ -32,8 +31,18 @@ public class ReceiptController {
     }
 
     @GetMapping("/monthly")
-    public String getReceiptsTotalValue(@RequestParam Long id, @RequestParam int month){
-        String total =  receiptService.getReceiptByUser(id,month).toString();
-        return total;
+    public String getReceiptsTotalValue(@RequestParam Long id ,@RequestParam int year, @RequestParam int month){
+        return receiptService.getReceiptByUserByMonth(id,year,month).toString();
     }
+
+    @GetMapping("/daily")
+    public String getReceiptsTotalDailyValue(@RequestParam Long id, @RequestParam int month, @RequestParam int day, @RequestParam int year){
+        return receiptService.getReceiptByUserByMonthByDay(id, month, day, year).toString();
+    }
+
+    @GetMapping("/yearly")
+    public String getReceiptsTotalYearlyValue(@RequestParam Long id, @RequestParam int year){
+        return receiptService.getReceiptByUserByYear(id, year).toString();
+    }
+
 }

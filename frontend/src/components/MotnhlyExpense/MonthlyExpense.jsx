@@ -3,24 +3,19 @@ import "./style.css"
 import useFetch from "../../hooks/useFetch";
 import {useUser} from "../../context/UserProvider";
 
-const MonthlyExpense = ({expense,date}) => {
+const MonthlyExpense = ({date, options}) => {
     const [month, setMonth] = React.useState(date.format('M'));
+    const [year, setYear] = React.useState(date.format('YYYY'));
+
     const{user} = useUser()
-    const options = {
-        headers:{
-            Authorization:`Bearer ${window.localStorage.getItem("token")}`,
-        },
-    }
-    const {loading,data,error} = useFetch("/api/receipt/monthly"+`?id=${user.id}&month=${month}`,options)
-    const [amount, setAmount] = React.useState(data);
+
+    const {loading,data,error} = useFetch("/api/receipt/monthly"+`?id=${user.id}&year=${year}&month=${month}`,options)
 
 
     React.useEffect(() => {
         setMonth(date.format('M'))
-        setAmount(expense)
-        console.log("izé")
-        console.log(amount)
-    }, [date,expense]);
+        setYear(date.format('YYYY'))
+    }, [date]);
 
 
     console.log(error?error:"No error occurred")

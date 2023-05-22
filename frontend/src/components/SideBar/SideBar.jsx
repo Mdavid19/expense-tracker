@@ -50,13 +50,14 @@ const SideBar = ({view, setView,date,setDate}) => {
                 <ToggleButton aria-label={"Yearly"}  value={"Yearly"} sx={{ width:"100%"}}>Yearly</ToggleButton>
                 <ToggleButton aria-label={"Detailed"}  value={"Detailed"} sx={{ width:"100%"}}>Detailed</ToggleButton>
             </ToggleButtonGroup>
-            <Button onClick={handleOpen} sx={{ width:"100%"}}>Choose Date</Button>
+            <Button onClick={handleOpen} sx={{ width:"100%"}}>{date.format('YYYY-MM-DD')}</Button>
         </Box>
         <Dialog open={open} onClose={handleClose}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DateCalendar value={date} onChange={(newValue) => setDate(newValue)} />
             </LocalizationProvider>
         </Dialog>
+
     </ThemeProvider>
     )
 }

@@ -8,7 +8,13 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.Set;
 
 public interface ReceiptRepository extends JpaRepository<Receipt,Long> {
-    @Query("SELECT r FROM Receipt r WHERE MONTH(r.date)=:month AND (r.client)=:client")
-    Set<Receipt> findReceiptsByClient_IdAndDate_Month(Client client, int month);
+    @Query("SELECT r FROM Receipt r WHERE YEAR(r.date)=:year AND MONTH(r.date)=:month AND (r.client)=:client")
+    Set<Receipt> findReceiptsByClient_IdAndDate_Month(Client client, int month, int year);
+
+    @Query("SELECT r FROM Receipt r WHERE YEAR(r.date)=:year AND MONTH(r.date)=:month AND DAY(r.date)=:day AND(r.client)=:client")
+    Set<Receipt> findReceiptsByClient_IdAndDate_MonthAndDate_DayOfMonth(Client client, int month, int day, int year);
+
+    @Query("SELECT r FROM Receipt r WHERE YEAR(r.date)=:year AND(r.client)=:client")
+    Set<Receipt> findReceiptsByClient_IdAndDate_Year(Client client, int year);
 
 }
