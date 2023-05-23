@@ -45,7 +45,7 @@ const MainPage = () => {
                 setContent(<YearlyExpense date={date} options={options}/>)
                 break;
             case 'Detailed':
-                setContent(<DetailedMonthlyView/>)
+                setContent(<DetailedMonthlyView date={date} options={options}/>)
                 break;
         }
     }, [view,date]);

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/receipt")
@@ -49,4 +50,9 @@ public class ReceiptController {
         return receiptService.getReceiptByUserByYear(id, year).toString();
     }
 
+
+    @GetMapping("/detailed")
+    public Map<String,String> getReceiptsTotalByType(@RequestParam Long id, @RequestParam int year){
+        return receiptService.getTotalSomeOfReceiptsByType(id,year);
+    }
 }
