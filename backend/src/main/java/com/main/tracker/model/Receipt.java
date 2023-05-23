@@ -24,6 +24,9 @@ public class Receipt {
 
     private LocalDate date;
 
+    @Enumerated(EnumType.STRING)
+    private ReceiptType receiptType;
+
     @ManyToOne
     @JoinColumn(name = "client_id")
     private Client client;
