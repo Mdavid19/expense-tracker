@@ -6,6 +6,7 @@ import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
 import UserProvider from "./context/UserProvider";
 import MainPage from "./pages/MainPage"
+import UserProfilePage from "./pages/UserProfilePage";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -15,6 +16,7 @@ root.render(
             <Routes>
                 <Route path='/' element={<LandingPage/>}/>
                 <Route path='/main' element={<MainPage/>}/>
+                <Route path='/user' element={<UserProfilePage/>}/>
             </Routes>
         </Router>
       </UserProvider>

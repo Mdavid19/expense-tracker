@@ -77,7 +77,6 @@ const LandingPage = () => {
                         <Grid container spacing={1}>
                             <Grid item xs={12}>
                                 <TextField
-                                    autoComplete="given-name"
                                     name="fullName"
                                     required
                                     fullWidth
