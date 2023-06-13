@@ -14,22 +14,25 @@ const MainPage = () => {
     const [view, setView] = React.useState('Daily');
     const [content, setContent] = React.useState();
     const [date, setDate] = React.useState(dayjs());
+    const [loading, setLoading] = React.useState(false);
     const {user} = useUser();
     const navigate = useNavigate()
 
+    // Navigate back to the Landing page if User not present
     useEffect(()=>{
         if(!user){
             navigate('/')
         }
     },[user,navigate])
 
+    // options for requesting the server with JWT token
     const options = {
         headers:{
             Authorization:`Bearer ${window.localStorage.getItem("token")}`,
         },
     }
 
-
+    // View changing logic
     useEffect(() => {
         switch (view){
             default:
@@ -53,11 +56,11 @@ const MainPage = () => {
 
     return user?(
         <div style={{height:"100%"}}>
-            <NavBar date={date}/>
+            <NavBar date={date} setLoading={setLoading}/>
             <div style={{height:'100%', display:'flex', flexDirection:'row'}}>
                 <SideBar view={view} setView={setView} date={date} setDate={setDate}/>
                 <div style={{ height:'100%', width:'100%', display:"flex", justifyContent:"center", alignItems:"center"}}>
-                    {content}
+                    {loading?"Loading...": content}
                 </div>
             </div>
 

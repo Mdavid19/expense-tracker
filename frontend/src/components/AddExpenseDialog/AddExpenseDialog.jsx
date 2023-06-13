@@ -25,9 +25,10 @@ const theme = createTheme({
     }
 })
 
-function AddExpenseDialog({date}) {
+function AddExpenseDialog({date,setLoading}) {
     const [open, setOpen] = React.useState(false);
-    const [amount, setAmount] = React.useState(null); // kitenni a mainre és csak a frontenden hozzáadni a useSATEHEZ ÉS NEM KELL FETCH CHAK HA TAB VÁLTÁS VAN
+    const [amount, setAmount] = React.useState(null);
+
     const {user} = useUser();
     const [type, setType] = React.useState("FOOD");
     const [localDate, setLocalDate] = React.useState(date);
@@ -54,6 +55,7 @@ function AddExpenseDialog({date}) {
     }
 
     function sendData(){
+        setLoading(true)
         fetch("/api/receipt/add",{
             method:"POST",
             headers:{
@@ -63,6 +65,7 @@ function AddExpenseDialog({date}) {
             body: JSON.stringify(data)
         }).then((res)=>{
             console.log(res.status)
+            setLoading(false)
         })
     }
 
