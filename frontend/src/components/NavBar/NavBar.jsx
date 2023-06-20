@@ -42,7 +42,11 @@ const NavBar = ({date, setLoading}) => {
                            Hello, {user.username}
                         </Typography>
                         <AddExpenseDialog setLoading={setLoading} date={date}/>
-                        <Button color="inherit" variant={"outlined"} onClick={handleLogout}>Logout</Button>
+                        <div>
+                            <Button sx={{marginRight:'5px'}} color="inherit" variant={"outlined"} onClick={()=>navigate('/user')}>User</Button>
+                            <Button  color="inherit" variant={"outlined"} onClick={handleLogout}>Logout</Button>
+                        </div>
+
                 </Toolbar>
             </AppBar>
         </ThemeProvider>
