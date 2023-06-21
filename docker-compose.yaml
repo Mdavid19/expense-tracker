@@ -1,0 +1,23 @@
+version: "3"
+services:
+  postgres:
+    image: postgres
+    environment:
+      - POSTGRES_DB=db-docker
+      - POSTGRES_PASSWORD=asd
+    ports:
+      - "5432:5432"
+
+  backend:
+    build: ./
+    ports:
+      - "8080:8080"
+    environment:
+      - secret=90e22ef331d810be70de9d9cc6b59f19d47e0f06db02571fe91771b36b694705
+
+  frontend:
+    ports:
+      - "3000:3000"
+    build: ./frontend
+
+
