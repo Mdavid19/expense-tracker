@@ -11,7 +11,12 @@ The application built up with Java Springboot backend and React frontend.
 
 ## Setup
 
-Here will come how to run this application with docker after i finished this project
+* To run this application required _**Docker-Compose**_ on your computer.
+* After you cloned my repository, open a terminal window in the root folder and run this command:
+`docker-compose up`
+* It will take a little time downloading dependencies and installing it.
+After that you can reach the application at http://localhost:3000
+* To stop the application run: `docker-compose down`
 
 ## Status
 
