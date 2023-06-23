@@ -18,6 +18,7 @@ const MainPage = () => {
     const {user} = useUser();
     const navigate = useNavigate()
 
+
     // Navigate back to the Landing page if User not present
     useEffect(()=>{
         if(!user){
@@ -60,7 +61,7 @@ const MainPage = () => {
             <div style={{height:'100%', display:'flex', flexDirection:'row'}}>
                 <SideBar view={view} setView={setView} date={date} setDate={setDate}/>
                 <div style={{ height:'100%', width:'100%', display:"flex", justifyContent:"center", alignItems:"center"}}>
-                    {loading?"Loading...": content}
+                    {loading?"Loading...": content }
                 </div>
             </div>
 

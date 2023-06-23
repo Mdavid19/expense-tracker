@@ -1,5 +1,4 @@
 import React from 'react';
-import {createTheme, ThemeProvider} from "@mui/material";
 import AppBar from "@mui/material/AppBar"
 import Toolbar from "@mui/material/Toolbar"
 import Typography from "@mui/material/Typography"
@@ -9,19 +8,6 @@ import {useNavigate} from "react-router-dom";
 import AddExpenseDialog from "../AddExpenseDialog";
 
 
-const theme = createTheme({
-        palette:{
-            primary:{
-                main:'#212121'
-            },
-            secondary:{
-                main:'#52b202',
-                contrastText:'#ffffff'
-            }
-        }
-    }
-
-)
 const NavBar = ({date, setLoading}) => {
     const {user, logout} = useUser()
     const navigate = useNavigate()
@@ -34,7 +20,6 @@ const NavBar = ({date, setLoading}) => {
 
     return (
 
-        <ThemeProvider theme={theme}>
             <AppBar color={"secondary"} component={"div"} sx={{position:"static"}}>
                 <Toolbar sx={{display: 'flex',
                     justifyContent: 'space-between'}}>
@@ -49,7 +34,6 @@ const NavBar = ({date, setLoading}) => {
 
                 </Toolbar>
             </AppBar>
-        </ThemeProvider>
     )
 }
 export default NavBar;

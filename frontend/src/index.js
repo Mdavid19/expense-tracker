@@ -7,18 +7,75 @@ import LandingPage from "./pages/LandingPage";
 import UserProvider from "./context/UserProvider";
 import MainPage from "./pages/MainPage"
 import UserProfilePage from "./pages/UserProfilePage";
+import {createTheme,ThemeProvider} from "@mui/material";
+import "typeface-teko";
+
+const theme = createTheme({
+        palette:{
+            primary:{
+                main:'#212121'
+            },
+            secondary:{
+                main:'#52b202',
+                contrastText:'#ffffff'
+            }
+        },
+    typography: {
+        fontFamily: [
+            'Teko',
+            'serif',
+        ].join(','),
+        fontSize:20
+    }})
+
+theme.typography.h3 = {
+    fontFamily: 'Teko',
+    fontSize: '3rem',
+    '@media (min-width:600px)': {
+        fontSize: '4rem',
+    },
+    [theme.breakpoints.up('md')]: {
+        fontSize: '7rem',
+    },
+};
+theme.typography.p = {
+    fontFamily: 'Teko',
+    fontSize: '3rem',
+    '@media (min-width:600px)': {
+        fontSize: '4rem',
+    },
+    [theme.breakpoints.up('md')]: {
+        fontSize: '7rem',
+    },
+};
+
+theme.typography.h2 = {
+    fontFamily: 'Teko',
+    fontWeight:200,
+    fontSize: '1rem',
+    '@media (min-width:600px)': {
+        fontSize: '2rem',
+    },
+    [theme.breakpoints.up('md')]: {
+        fontSize: '3rem',
+    },
+};
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+
       <UserProvider>
-        <Router>
-            <Routes>
-                <Route path='/' element={<LandingPage/>}/>
-                <Route path='/main' element={<MainPage/>}/>
-                <Route path='/user' element={<UserProfilePage/>}/>
-            </Routes>
-        </Router>
+          <ThemeProvider theme={theme}>
+            <Router>
+                <Routes>
+                    <Route path='/' element={<LandingPage/>}/>
+                    <Route path='/main' element={<MainPage/>}/>
+                    <Route path='/user' element={<UserProfilePage/>}/>
+                </Routes>
+            </Router>
+          </ThemeProvider>
       </UserProvider>
   </React.StrictMode>
 );

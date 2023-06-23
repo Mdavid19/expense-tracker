@@ -18,7 +18,7 @@ function UserProfilePage(props) {
     return (
         <div className={"main-container"}>
             <h2 className={"header-item"}>PROFILE SETTINGS</h2>
-            <Button className={"back-button"} variant={"outlined"} onClick={()=>navigate('/main')}>Back</Button>
+            <Button className={"back-button"} sx={{marginRight:"1%"}} variant={"outlined"} onClick={()=>navigate('/main')}>Back</Button>
             <CurrencySetter/>
         </div>
     );

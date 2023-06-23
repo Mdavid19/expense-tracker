@@ -14,5 +14,13 @@ public class ClientService {
         return clientRepository.findUserByUsername(username).orElse(null);
     }
 
+    public void changeCurrency(String username, String currency){
+        Client client = getClient(username);
+        client.setCurrency(currency);
+        clientRepository.save(client);
+    }
+
+
+
 
 }
