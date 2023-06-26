@@ -2,12 +2,13 @@ import React from 'react';
 import "./style.css"
 import useFetch from "../../hooks/useFetch";
 import {useUser} from "../../context/UserProvider";
+import Typography from "@mui/material/Typography";
 
 const MonthlyExpense = ({date, options}) => {
     const [month, setMonth] = React.useState(date.format('M'));
     const [year, setYear] = React.useState(date.format('YYYY'));
 
-    const{user} = useUser()
+    const{user,currency} = useUser()
 
     const {loading,data,error} = useFetch("/api/receipt/monthly"+`?id=${user.id}&year=${year}&month=${month}`,options)
 
@@ -22,7 +23,8 @@ const MonthlyExpense = ({date, options}) => {
 
     return(
         <div className={"circle"}>
-            <h1>{loading?"Loading...":data}</h1>
+            <Typography variant={"h3"}>{loading ? 'Loading...' : data + " "}</Typography>
+            <Typography variant={"p"}>{loading ? 'Loading...' :currency}</Typography>
         </div>
 
 )}

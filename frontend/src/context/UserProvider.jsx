@@ -7,6 +7,7 @@ const setToken = (token) => window.localStorage.setItem("token", token)
 const UserProvider = ({children}) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [currency, setCurrency] = useState(" ");
 
     const getMe = (token) => {
         fetch('/api/get-me', {
@@ -17,6 +18,7 @@ const UserProvider = ({children}) => {
             .then((res) => (res.json()))
             .then((res) => {
                 setUser(res);
+                setCurrency(res.currency)
             })
             .finally(() => {
                 setLoading(false)
@@ -54,7 +56,7 @@ const UserProvider = ({children}) => {
         setUser(null);
     }
     return (
-        <UserContext.Provider value={{user, login, logout}}>
+        <UserContext.Provider value={{user, login, logout, currency,setCurrency}}>
             {!loading && children}
         </UserContext.Provider>
     )

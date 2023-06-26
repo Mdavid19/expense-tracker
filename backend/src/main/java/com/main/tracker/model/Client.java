@@ -28,6 +28,8 @@ public class Client implements UserDetails {
 
     private String email;
 
+    private String currency;
+
     @OneToMany(mappedBy = "client")
     private Set<Receipt> receipts;
 

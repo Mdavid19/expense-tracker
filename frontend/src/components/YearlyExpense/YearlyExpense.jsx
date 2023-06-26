@@ -2,9 +2,10 @@ import React from 'react';
 import './yearly.css'
 import {useUser} from "../../context/UserProvider";
 import useFetch from "../../hooks/useFetch";
+import Typography from "@mui/material/Typography";
 const YearlyExpense = ({date, options}) => {
     const [year, setYear] = React.useState(date.format('YYYY'));
-    const{user} = useUser()
+    const{user,currency} = useUser()
 
     const {loading,data,error} = useFetch("/api/receipt/yearly"+`?id=${user.id}&year=${year}`,options)
 
@@ -17,7 +18,8 @@ const YearlyExpense = ({date, options}) => {
     console.log(error?error:"No error occurred")
     return(
     <div className={'circle3'}>
-        <h1>{loading?"Loadin...":data}</h1>
+        <Typography variant={"h3"}>{loading ? 'Loading...' : data}</Typography>
+        <Typography variant={"p"}>{loading ? 'Loading...' : currency}</Typography>
     </div>
 )
 
