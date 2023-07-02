@@ -60,6 +60,7 @@ const LoginModal = ({style}) => {
                             fullWidth
                             id="password"
                             label="Password"
+                            type={"password"}
                             autoFocus
                             variant={"filled"}
                             onChange={(event) => {
